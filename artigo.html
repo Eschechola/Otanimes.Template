@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Okarun em DanDaDan: Rotina do Personagem Revela que Ele Quase Não Dorme - Otanimes</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Space+Mono:wght@400;700&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="assets/css/styles.css">
+    <style>
+        /* ARTICLE PAGE STYLES */
+        .article-header {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 2rem 0;
+            border-bottom: 3px solid var(--neon-magenta);
+        }
+
+        .article-category-badge {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--neon-cyan), var(--neon-magenta));
+            color: var(--bg-dark);
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            font-weight: 700;
+            font-family: var(--font-display);
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 0.85rem;
+        }
+
+        .article-header h1 {
+            font-family: var(--font-display);
+            font-size: 2.8rem;
+            font-weight: 900;
+            line-height: 1.2;
+            margin-bottom: 1.5rem;
+            color: var(--text-primary);
+            text-transform: uppercase;
+            letter-spacing: -0.5px;
+        }
+
+        .article-meta-info {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid rgba(0, 217, 255, 0.2);
+        }
+
+        .author-info {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .author-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            border: 2px solid var(--neon-cyan);
+            object-fit: cover;
+        }
+
+        .author-details h3 {
+            color: var(--neon-cyan);
+            font-weight: 700;
+            margin-bottom: 0.2rem;
+        }
+
+        .author-details p {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        .article-date {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+        }
+
+        .article-featured-image {
+            max-width: 900px;
+            margin: 3rem auto;
+            border-radius: 4px;
+            overflow: hidden;
+            border: 3px solid var(--neon-cyan);
+            box-shadow: 0 0 40px rgba(0, 217, 255, 0.4);
+        }
+
+        .article-featured-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .article-body {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .article-body p {
+            color: var(--text-secondary);
+            font-size: 1.05rem;
+            line-height: 1.8;
+            margin-bottom: 1.8rem;
+        }
+
+        .article-body h2 {
+            font-family: var(--font-display);
+            font-size: 2rem;
+            font-weight: 900;
+            margin-top: 2.5rem;
+            margin-bottom: 1.5rem;
+            color: var(--neon-cyan);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            position: relative;
+            padding-left: 1rem;
+        }
+
+        .article-body h2::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 4px;
+            background: linear-gradient(180deg, var(--neon-cyan), var(--neon-magenta));
+            box-shadow: 0 0 15px rgba(0, 217, 255, 0.6);
+        }
+
+        .article-body h3 {
+            font-family: var(--font-display);
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+            color: var(--neon-magenta);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .article-body ul, .article-body ol {
+            margin-left: 2rem;
+            margin-bottom: 1.8rem;
+            color: var(--text-secondary);
+        }
+
+        .article-body li {
+            margin-bottom: 0.8rem;
+            line-height: 1.8;
+        }
+
+        .highlight-box {
+            background: linear-gradient(135deg, rgba(0, 217, 255, 0.1), rgba(157, 0, 255, 0.1));
+            border-left: 4px solid var(--neon-cyan);
+            border-radius: 4px;
+            padding: 1.5rem;
+            margin: 2rem 0;
+            box-shadow: 0 0 20px rgba(0, 217, 255, 0.2);
+        }
+
+        .highlight-box p {
+            color: var(--text-secondary);
+            margin: 0;
+            font-style: italic;
+        }
+
+        .highlight-box strong {
+            color: var(--neon-cyan);
+        }
+
+        .quote-box {
+            background: var(--bg-card);
+            border: 2px solid var(--neon-magenta);
+            border-radius: 4px;
+            padding: 2rem;
+            margin: 2rem 0;
+            text-align: center;
+            box-shadow: 0 0 25px rgba(255, 0, 110, 0.2);
+        }
+
+        .quote-box p {
+            font-size: 1.2rem;
+            color: var(--neon-cyan);
+            font-style: italic;
+            margin-bottom: 1rem;
+        }
+
+        .quote-author {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+        }
+
+        /* RELATED ARTICLES */
+        .related-articles {
+            max-width: 900px;
+            margin: 4rem auto 0;
+            padding: 3rem 2rem;
+            border-top: 3px solid var(--neon-magenta);
+        }
+
+        .related-title {
+            font-family: var(--font-display);
+            font-size: 1.8rem;
+            font-weight: 900;
+            margin-bottom: 2rem;
+            color: var(--neon-cyan);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .related-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .related-card {
+            background: var(--bg-card);
+            border: 2px solid rgba(0, 217, 255, 0.3);
+            border-radius: 4px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .related-card:hover {
+            border-color: var(--neon-cyan);
+            box-shadow: 0 0 25px rgba(0, 217, 255, 0.4);
+            transform: translateY(-3px);
+        }
+
+        .related-card img {
+            width: 100%;
+            height: 150px;
+            object-fit: cover;
+            border-bottom: 2px solid var(--neon-magenta);
+        }
+
+        .related-card-content {
+            padding: 1.2rem;
+        }
+
+        .related-card h3 {
+            font-family: var(--font-display);
+            font-size: 0.95rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 0.5rem;
+            line-height: 1.3;
+        }
+
+        .related-card-date {
+            color: var(--text-muted);
+            font-size: 0.8rem;
+        }
+
+        @media (max-width: 768px) {
+            .article-header {
+                padding: 1.5rem 0;
+            }
+
+            .article-header h1 {
+                font-size: 1.8rem;
+            }
+
+            .article-meta-info {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .article-body {
+                padding: 0 1rem;
+            }
+
+            .article-body h2 {
+                font-size: 1.5rem;
+            }
+
+            .article-body h3 {
+                font-size: 1.2rem;
+            }
+
+            .related-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- HEADER -->
+    <header>
+        <div class="header-container">
+            <a href="/" class="logo">◆ OTANIMES ◆</a>
+            <nav>
+                <a href="/">Home</a>
+                <a href="animes.html">Animes</a>
+                <a href="autores.html">Autores</a>
+                <a href="contato.html">Contato</a>
+                <button class="btn-newsletter" onclick="window.location.href='newsletter.html'">Newsletter</button>
+            </nav>
+        </div>
+    </header>
+
+    <!-- MAIN CONTENT -->
+    <main class="container-wide">
+        <!-- ARTICLE HEADER -->
+        <article class="article-header">
+            <span class="article-category-badge">📺 Animes</span>
+            <h1>Okarun em DanDaDan: Rotina do Personagem Revela que Ele Quase Não Dorme</h1>
+            
+            <div class="article-meta-info">
+                <div class="author-info">
+                    <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=50&h=50&fit=crop" alt="Gustavo Azevedo" class="author-avatar">
+                    <div class="author-details">
+                        <h3>Gustavo Azevedo</h3>
+                        <p>Fundador & Editor Chefe</p>
+                    </div>
+                </div>
+                <span class="article-date">21 de Agosto, 2025</span>
+            </div>
+        </article>
+
+        <!-- FEATURED IMAGE -->
+        <div class="article-featured-image">
+            <img src="https://images.unsplash.com/photo-1578926314433-e2789279f4aa?w=900&h=500&fit=crop" alt="Okarun em DanDaDan">
+        </div>
+
+        <!-- ARTICLE BODY -->
+        <div class="article-body">
+            <p>
+                O databook de <strong>DanDaDan</strong> trouxe detalhes surpreendentes sobre a rotina diária de Okarun — e o resultado chocou completamente os fãs. Descubra como o protagonista consegue equilibrar a vida escolar com suas aventuras sobrenaturais, e por que ele praticamente não dorme!
+            </p>
+
+            <h2>A Rotina Impossível de Okarun</h2>
+
+            <p>
+                Segundo o databook oficial de DanDaDan, Okarun segue uma rotina que parece quase impossível de manter. O personagem acorda cedo para ir à escola, participa de todas as aulas, e ainda consegue encontrar tempo para suas investigações paranormais com Momo. Mas o que realmente chama atenção é a quantidade de horas que ele dorme por noite.
+            </p>
+
+            <div class="highlight-box">
+                <p>
+                    <strong>Fato Chocante:</strong> De acordo com o databook, Okarun dorme apenas 4-5 horas por noite, o que é significativamente abaixo da recomendação médica de 7-9 horas para adolescentes.
+                </p>
+            </div>
+
+            <h3>Por Que Tão Pouco Sono?</h3>
+
+            <p>
+                A razão pela qual Okarun dorme tão pouco é multifatorial. Primeiro, há a pressão de manter suas notas altas na escola — ele é um aluno dedicado que leva seus estudos muito a sério. Segundo, há suas investigações paranormais com Momo, que frequentemente ocorrem à noite. E terceiro, há a ansiedade geral que acompanha o conhecimento de que seres sobrenaturais existem e podem aparecer a qualquer momento.
+            </p>
+
+            <p>
+                Além disso, Okarun é o tipo de pessoa que se preocupa muito. Ele pensa constantemente sobre como proteger Momo, como resolver os mistérios paranormais que encontram, e como lidar com as consequências de seus encontros com entidades sobrenaturais. Tudo isso contribui para uma mente sempre ativa e dificuldade em adormecer.
+            </p>
+
+            <h3>O Impacto na Saúde</h3>
+
+            <p>
+                A falta de sono crônica de Okarun tem impactos visíveis em seu comportamento e desempenho. Embora ele tente manter uma aparência normal na escola, é claro que está constantemente cansado. Seus olhos frequentemente mostram sinais de fadiga, e há momentos em que ele quase adormece durante as aulas.
+            </p>
+
+            <div class="quote-box">
+                <p>"Dormir é um luxo que Okarun não pode se permitir quando há mistérios paranormais para resolver e pessoas para proteger."</p>
+                <p class="quote-author">— Análise do Databook Oficial</p>
+            </div>
+
+            <h3>Comparação com Momo</h3>
+
+            <p>
+                Interessantemente, Momo tem uma rotina completamente diferente. Enquanto Okarun sacrifica o sono, Momo consegue manter um equilíbrio melhor entre suas atividades paranormais e sua vida normal. Isso pode ser atribuído à sua natureza mais descontraída e à sua capacidade de compartimentalizar suas preocupações.
+            </p>
+
+            <p>
+                Essa diferença nos padrões de sono é um reflexo perfeito das personalidades dos dois personagens — Okarun é o tipo obsessivo e dedicado, enquanto Momo é mais flexível e adaptável.
+            </p>
+
+            <h2>O Que Isso Significa para o Futuro?</h2>
+
+            <p>
+                Se Okarun continuar com esse padrão de sono, há sérias preocupações sobre sua saúde a longo prazo. A privação crônica de sono pode levar a problemas cognitivos, imunológicos e emocionais. É possível que a série explore esse tema mais profundamente conforme progride.
+            </p>
+
+            <div class="highlight-box">
+                <p>
+                    <strong>Teoria dos Fãs:</strong> Muitos fãs especulam que a falta de sono de Okarun pode estar conectada a sua sensibilidade paranormal. Talvez estar em um estado de semi-vigília o torne mais receptivo a atividades sobrenaturais?
+                </p>
+            </div>
+
+            <h3>Conclusão</h3>
+
+            <p>
+                O databook de DanDaDan nos oferece uma visão fascinante da vida diária de Okarun, revelando que ele é alguém disposto a sacrificar sua própria saúde e bem-estar pelo bem maior. Sua rotina de apenas 4-5 horas de sono é um testamento à sua dedicação e à intensidade de suas aventuras paranormais.
+            </p>
+
+            <p>
+                Enquanto continuamos acompanhando a série, será interessante ver como Okarun lida com as consequências de sua privação de sono crônica e se ele conseguirá encontrar um equilíbrio melhor entre sua vida normal e suas atividades paranormais.
+            </p>
+        </div>
+
+        <!-- RELATED ARTICLES -->
+        <section class="related-articles">
+            <h2 class="related-title">📚 Artigos Relacionados</h2>
+            <div class="related-grid">
+                <article class="related-card" onclick="window.location.href='artigo.html'">
+                    <img src="https://images.unsplash.com/photo-1578926314433-e2789279f4aa?w=400&h=150&fit=crop" alt="Artigo">
+                    <div class="related-card-content">
+                        <h3>Momo em DanDaDan: Análise da Personagem Principal</h3>
+                        <p class="related-card-date">15 de Agosto, 2025</p>
+                    </div>
+                </article>
+
+                <article class="related-card" onclick="window.location.href='artigo.html'">
+                    <img src="https://images.unsplash.com/photo-1578926314433-e2789279f4aa?w=400&h=150&fit=crop" alt="Artigo">
+                    <div class="related-card-content">
+                        <h3>DanDaDan: Mistérios Paranormais Explicados</h3>
+                        <p class="related-card-date">10 de Agosto, 2025</p>
+                    </div>
+                </article>
+
+                <article class="related-card" onclick="window.location.href='artigo.html'">
+                    <img src="https://images.unsplash.com/photo-1578926314433-e2789279f4aa?w=400&h=150&fit=crop" alt="Artigo">
+                    <div class="related-card-content">
+                        <h3>Animes de 2025: Os Melhores Lançamentos do Ano</h3>
+                        <p class="related-card-date">5 de Agosto, 2025</p>
+                    </div>
+                </article>
+            </div>
+        </section>
+    </main>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Otanimes</h3>
+                <p>Portal do Multiverso Otaku - Notícias, análises e curiosidades sobre animes, mangás e cultura geek.</p>
+            </div>
+            <div class="footer-section">
+                <h3>Navegação</h3>
+                <a href="/">Home</a>
+                <a href="animes.html">Animes</a>
+                <a href="autores.html">Autores</a>
+                <a href="contato.html">Contato</a>
+            </div>
+            <div class="footer-section">
+                <h3>Comunidade</h3>
+                <a href="#">Discord</a>
+                <a href="#">Twitter</a>
+                <a href="#">Instagram</a>
+                <a href="#">YouTube</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 Otanimes. Todos os direitos reservados. | Design Cyberpunk Futurista</p>
+        </div>
+    </footer>
+
+    <!-- JS -->
+    <script src="assets/js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Newsletter - Otanimes</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Space+Mono:wght@400;700&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="assets/css/styles.css">
+    <style>
+        /* NEWSLETTER PAGE STYLES */
+        .newsletter-hero {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+            padding: 3rem 0;
+            margin-bottom: 3rem;
+        }
+
+        .newsletter-content h1 {
+            font-family: var(--font-display);
+            font-size: 2.8rem;
+            font-weight: 900;
+            line-height: 1.2;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(90deg, var(--neon-cyan), var(--neon-magenta), var(--neon-purple));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-transform: uppercase;
+            letter-spacing: -1px;
+        }
+
+        .newsletter-content p {
+            color: var(--text-secondary);
+            font-size: 1.05rem;
+            margin-bottom: 1.5rem;
+            line-height: 1.8;
+        }
+
+        .newsletter-benefits {
+            list-style: none;
+            margin-bottom: 2rem;
+        }
+
+        .newsletter-benefits li {
+            color: var(--text-secondary);
+            margin-bottom: 0.8rem;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .newsletter-benefits li::before {
+            content: '⚡';
+            position: absolute;
+            left: 0;
+            color: var(--neon-cyan);
+        }
+
+        .newsletter-form {
+            background: linear-gradient(135deg, rgba(0, 217, 255, 0.1), rgba(157, 0, 255, 0.1));
+            border: 2px solid rgba(0, 217, 255, 0.3);
+            border-radius: 4px;
+            padding: 2rem;
+            box-shadow: 0 0 30px rgba(0, 217, 255, 0.1);
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-note {
+            color: var(--text-muted);
+            font-size: 0.8rem;
+            margin-top: 1rem;
+            text-align: center;
+        }
+
+        .newsletter-features {
+            margin-top: 4rem;
+            padding-top: 3rem;
+            border-top: 2px solid var(--neon-magenta);
+        }
+
+        .features-title {
+            font-family: var(--font-display);
+            font-size: 2rem;
+            font-weight: 900;
+            margin-bottom: 2rem;
+            color: var(--neon-cyan);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            text-align: center;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .feature-card {
+            background: var(--bg-card);
+            border: 2px solid rgba(0, 217, 255, 0.3);
+            border-radius: 4px;
+            padding: 2rem;
+            text-align: center;
+            transition: all 0.3s ease;
+            box-shadow: 0 0 15px rgba(0, 217, 255, 0.1);
+        }
+
+        .feature-card:hover {
+            border-color: var(--neon-cyan);
+            box-shadow: 0 0 25px rgba(0, 217, 255, 0.4);
+            transform: translateY(-3px);
+        }
+
+        .feature-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .feature-card h3 {
+            color: var(--neon-cyan);
+            margin-bottom: 0.8rem;
+            font-family: var(--font-display);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .feature-card p {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        .testimonials {
+            margin-top: 4rem;
+            padding: 3rem;
+            background: linear-gradient(135deg, rgba(255, 0, 110, 0.1), rgba(0, 217, 255, 0.1));
+            border: 2px solid var(--neon-magenta);
+            border-radius: 4px;
+            text-align: center;
+        }
+
+        .testimonials-title {
+            font-family: var(--font-display);
+            font-size: 1.8rem;
+            font-weight: 900;
+            margin-bottom: 2rem;
+            color: var(--neon-cyan);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .testimonial {
+            background: rgba(26, 31, 58, 0.6);
+            border: 1px solid rgba(0, 217, 255, 0.2);
+            border-radius: 4px;
+            padding: 1.5rem;
+        }
+
+        .testimonial-text {
+            color: var(--text-secondary);
+            margin-bottom: 1rem;
+            font-style: italic;
+            line-height: 1.6;
+        }
+
+        .testimonial-author {
+            color: var(--neon-cyan);
+            font-weight: 700;
+            font-family: var(--font-display);
+        }
+
+        .testimonial-role {
+            color: var(--text-muted);
+            font-size: 0.85rem;
+        }
+
+        @media (max-width: 768px) {
+            .newsletter-hero {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .newsletter-content h1 {
+                font-size: 2rem;
+            }
+
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .testimonials-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .newsletter-form {
+                padding: 1.5rem;
+            }
+
+            .testimonials {
+                padding: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- HEADER -->
+    <header>
+        <div class="header-container">
+            <a href="/" class="logo">◆ OTANIMES ◆</a>
+            <nav>
+                <a href="/">Home</a>
+                <a href="animes.html">Animes</a>
+                <a href="autores.html">Autores</a>
+                <a href="contato.html">Contato</a>
+                <button class="btn-newsletter" onclick="document.querySelector('.newsletter-form').scrollIntoView({behavior: 'smooth'})">Newsletter</button>
+            </nav>
+        </div>
+    </header>
+
+    <!-- MAIN CONTENT -->
+    <main class="container">
+        <!-- NEWSLETTER HERO -->
+        <section class="newsletter-hero">
+            <div class="newsletter-content">
+                <h1>Fique por dentro do Multiverso Otaku</h1>
+                <p>Receba as análises mais profundas, notícias quentes e curiosidades incríveis sobre animes, mangás e cultura geek diretamente na sua caixa de entrada.</p>
+                
+                <ul class="newsletter-benefits">
+                    <li>📰 Artigos exclusivos toda semana</li>
+                    <li>🎬 Análises de animes em alta</li>
+                    <li>🔥 Notícias antes de qualquer um</li>
+                    <li>💬 Comunidade ativa e engajada</li>
+                    <li>🎁 Sorteios e promoções especiais</li>
+                </ul>
+            </div>
+
+            <!-- NEWSLETTER FORM -->
+            <div class="newsletter-form">
+                <form id="newsletterForm">
+                    <div class="form-group">
+                        <label for="name">Nome</label>
+                        <input type="text" id="name" name="name" placeholder="Seu nome" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" name="email" placeholder="seu@email.com" required>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary" style="width: 100%;">Inscrever-se Agora</button>
+                    <p class="form-note">✓ Nunca enviamos spam. Você pode cancelar a inscrição a qualquer momento.</p>
+                </form>
+            </div>
+        </section>
+
+        <!-- NEWSLETTER FEATURES -->
+        <section class="newsletter-features">
+            <h2 class="features-title">O que você vai receber</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">📚</div>
+                    <h3>Análises Profundas</h3>
+                    <p>Mergulhe em análises detalhadas de narrativas, personagens e temas dos animes mais populares.</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">⚡</div>
+                    <h3>Notícias em Primeira Mão</h3>
+                    <p>Fique atualizado com as últimas notícias do mundo anime antes de qualquer outro site.</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">🎯</div>
+                    <h3>Curiosidades Nerd</h3>
+                    <p>Descubra detalhes incríveis, easter eggs e curiosidades que você nunca havia notado.</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">👥</div>
+                    <h3>Comunidade Ativa</h3>
+                    <p>Conecte-se com outros fãs de anime e compartilhe suas paixões e teorias.</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">🎁</div>
+                    <h3>Sorteios Exclusivos</h3>
+                    <p>Participe de sorteios e promoções especiais exclusivas para nossos inscritos.</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">🌟</div>
+                    <h3>Conteúdo Premium</h3>
+                    <p>Acesse análises aprofundadas e conteúdo exclusivo que não está no site.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- TESTIMONIALS -->
+        <section class="testimonials">
+            <h2 class="testimonials-title">O que nossos inscritos dizem</h2>
+            <div class="testimonials-grid">
+                <div class="testimonial">
+                    <p class="testimonial-text">"As análises do Otanimes mudaram completamente a forma como eu vejo animes. Recomendo para todo fã!"</p>
+                    <p class="testimonial-author">Takeshi Yamada</p>
+                    <p class="testimonial-role">Fã de Anime</p>
+                </div>
+
+                <div class="testimonial">
+                    <p class="testimonial-text">"Newsletter impecável! Sempre traz conteúdo de qualidade e notícias que ninguém mais tem."</p>
+                    <p class="testimonial-author">Sakura Tanaka</p>
+                    <p class="testimonial-role">Crítica de Animes</p>
+                </div>
+
+                <div class="testimonial">
+                    <p class="testimonial-text">"Finalmente encontrei um site que entende verdadeiramente a cultura otaku. Muito bom!"</p>
+                    <p class="testimonial-author">Kenji Suzuki</p>
+                    <p class="testimonial-role">Produtor de Conteúdo</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Otanimes</h3>
+                <p>Portal do Multiverso Otaku - Notícias, análises e curiosidades sobre animes, mangás e cultura geek.</p>
+            </div>
+            <div class="footer-section">
+                <h3>Navegação</h3>
+                <a href="/">Home</a>
+                <a href="animes.html">Animes</a>
+                <a href="autores.html">Autores</a>
+                <a href="contato.html">Contato</a>
+            </div>
+            <div class="footer-section">
+                <h3>Comunidade</h3>
+                <a href="#">Discord</a>
+                <a href="#">Twitter</a>
+                <a href="#">Instagram</a>
+                <a href="#">YouTube</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 Otanimes. Todos os direitos reservados. | Design Cyberpunk Futurista</p>
+        </div>
+    </footer>
+
+    <!-- JS -->
+    <script src="assets/js/main.js"></script>
+</body>
+</html>

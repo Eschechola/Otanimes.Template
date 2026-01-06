@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contato - Otanimes</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Space+Mono:wght@400;700&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="assets/css/styles.css">
+    <style>
+        /* CONTACT PAGE STYLES */
+        .contact-form {
+            background: linear-gradient(135deg, rgba(0, 217, 255, 0.1), rgba(157, 0, 255, 0.1));
+            border: 2px solid rgba(0, 217, 255, 0.3);
+            border-radius: 4px;
+            padding: 2.5rem;
+            box-shadow: 0 0 30px rgba(0, 217, 255, 0.1);
+            margin-bottom: 3rem;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+        }
+
+        .form-row.full {
+            grid-template-columns: 1fr;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .success-message {
+            display: none;
+            background: linear-gradient(135deg, rgba(0, 217, 255, 0.1), rgba(157, 0, 255, 0.1));
+            border: 2px solid var(--neon-cyan);
+            border-radius: 4px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            text-align: center;
+            box-shadow: 0 0 25px rgba(0, 217, 255, 0.3);
+        }
+
+        .success-message.show {
+            display: block;
+            animation: slideIn 0.5s ease;
+        }
+
+        .success-message h3 {
+            color: var(--neon-cyan);
+            margin-bottom: 0.5rem;
+            font-family: var(--font-display);
+        }
+
+        .success-message p {
+            color: var(--text-secondary);
+        }
+
+        .contact-info {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .info-card {
+            background: var(--bg-card);
+            border: 2px solid rgba(0, 217, 255, 0.3);
+            border-radius: 4px;
+            padding: 1.5rem;
+            text-align: center;
+            transition: all 0.3s ease;
+            box-shadow: 0 0 15px rgba(0, 217, 255, 0.1);
+        }
+
+        .info-card:hover {
+            border-color: var(--neon-cyan);
+            box-shadow: 0 0 25px rgba(0, 217, 255, 0.4);
+            transform: translateY(-3px);
+        }
+
+        .info-card-icon {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .info-card h3 {
+            color: var(--neon-cyan);
+            margin-bottom: 0.5rem;
+            font-family: var(--font-display);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .info-card p {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+        }
+
+        .info-card a {
+            color: var(--neon-magenta);
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .info-card a:hover {
+            color: var(--neon-cyan);
+            text-shadow: 0 0 10px rgba(0, 217, 255, 0.6);
+        }
+
+        @media (max-width: 768px) {
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+
+            .contact-form {
+                padding: 1.5rem;
+            }
+
+            .contact-info {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- HEADER -->
+    <header>
+        <div class="header-container">
+            <a href="/" class="logo">◆ OTANIMES ◆</a>
+            <nav>
+                <a href="/">Home</a>
+                <a href="animes.html">Animes</a>
+                <a href="autores.html">Autores</a>
+                <a href="contato.html">Contato</a>
+                <button class="btn-newsletter" onclick="window.location.href='newsletter.html'">Newsletter</button>
+            </nav>
+        </div>
+    </header>
+
+    <!-- MAIN CONTENT -->
+    <main class="container-narrow">
+        <!-- PAGE HEADER -->
+        <header class="page-header">
+            <h1>⚡ Entre em Contato</h1>
+            <p>Tem uma sugestão, dúvida ou quer colaborar? Envie sua mensagem e responderemos o mais rápido possível!</p>
+        </header>
+
+        <!-- SUCCESS MESSAGE -->
+        <div class="success-message" id="successMessage">
+            <h3>✓ Mensagem Enviada com Sucesso!</h3>
+            <p>Obrigado por entrar em contato. Responderemos em breve.</p>
+        </div>
+
+        <!-- CONTACT FORM -->
+        <form class="contact-form" id="contactForm">
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="firstName">Nome</label>
+                    <input type="text" id="firstName" name="firstName" placeholder="Seu nome" required>
+                </div>
+                <div class="form-group">
+                    <label for="lastName">Sobrenome</label>
+                    <input type="text" id="lastName" name="lastName" placeholder="Seu sobrenome" required>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" placeholder="seu@email.com" required>
+            </div>
+
+            <div class="form-group">
+                <label for="phone">Telefone (Opcional)</label>
+                <input type="tel" id="phone" name="phone" placeholder="(11) 99999-9999">
+            </div>
+
+            <div class="form-group">
+                <label for="subject">Assunto</label>
+                <select id="subject" name="subject" required>
+                    <option value="">Selecione um assunto...</option>
+                    <option value="sugestao">Sugestão de Artigo</option>
+                    <option value="erro">Reportar Erro</option>
+                    <option value="colaboracao">Colaboração</option>
+                    <option value="publicidade">Publicidade</option>
+                    <option value="outro">Outro</option>
+                </select>
+            </div>
+
+            <div class="form-group form-row full">
+                <label for="message">Mensagem</label>
+                <textarea id="message" name="message" placeholder="Escreva sua mensagem aqui..." required></textarea>
+            </div>
+
+            <button type="submit" class="btn btn-primary" style="width: 100%;">Enviar Mensagem</button>
+        </form>
+
+        <!-- CONTACT INFO -->
+        <section class="contact-info">
+            <div class="info-card">
+                <div class="info-card-icon">📧</div>
+                <h3>Email</h3>
+                <p><a href="mailto:contato@otanimes.com.br">contato@otanimes.com.br</a></p>
+            </div>
+
+            <div class="info-card">
+                <div class="info-card-icon">💬</div>
+                <h3>Discord</h3>
+                <p><a href="#">Junte-se ao nosso servidor</a></p>
+            </div>
+
+            <div class="info-card">
+                <div class="info-card-icon">🐦</div>
+                <h3>Twitter</h3>
+                <p><a href="#">@otanimes</a></p>
+            </div>
+        </section>
+    </main>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Otanimes</h3>
+                <p>Portal do Multiverso Otaku - Notícias, análises e curiosidades sobre animes, mangás e cultura geek.</p>
+            </div>
+            <div class="footer-section">
+                <h3>Navegação</h3>
+                <a href="/">Home</a>
+                <a href="animes.html">Animes</a>
+                <a href="autores.html">Autores</a>
+                <a href="contato.html">Contato</a>
+            </div>
+            <div class="footer-section">
+                <h3>Comunidade</h3>
+                <a href="#">Discord</a>
+                <a href="#">Twitter</a>
+                <a href="#">Instagram</a>
+                <a href="#">YouTube</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 Otanimes. Todos os direitos reservados. | Design Cyberpunk Futurista</p>
+        </div>
+    </footer>
+
+    <!-- JS -->
+    <script src="assets/js/main.js"></script>
+</body>
+</html>

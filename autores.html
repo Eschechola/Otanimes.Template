@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Autores - Otanimes</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Space+Mono:wght@400;700&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="assets/css/styles.css">
+    <style>
+        /* AUTHORS PAGE STYLES */
+        .authors-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2.5rem;
+            margin-bottom: 3rem;
+        }
+
+        .author-card {
+            background: var(--bg-card);
+            border: 2px solid rgba(0, 217, 255, 0.3);
+            border-radius: 4px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            position: relative;
+            box-shadow: 0 0 20px rgba(0, 217, 255, 0.1);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .author-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--neon-cyan), var(--neon-magenta));
+            box-shadow: 0 0 15px rgba(0, 217, 255, 0.6);
+        }
+
+        .author-card:hover {
+            border-color: var(--neon-cyan);
+            box-shadow: 0 0 35px rgba(0, 217, 255, 0.5);
+            transform: translateY(-8px);
+        }
+
+        .author-header {
+            background: linear-gradient(135deg, rgba(0, 217, 255, 0.1), rgba(157, 0, 255, 0.1));
+            padding: 2rem 1.5rem;
+            text-align: center;
+            border-bottom: 2px solid rgba(0, 217, 255, 0.3);
+        }
+
+        .author-avatar {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            border: 3px solid var(--neon-cyan);
+            margin: 0 auto 1rem;
+            object-fit: cover;
+            box-shadow: 0 0 25px rgba(0, 217, 255, 0.4), inset 0 0 25px rgba(0, 217, 255, 0.1);
+        }
+
+        .author-name {
+            font-family: var(--font-display);
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--neon-cyan);
+            margin-bottom: 0.3rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .author-nickname {
+            color: var(--neon-magenta);
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .author-role {
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .author-content {
+            padding: 1.5rem;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .author-bio {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+            flex-grow: 1;
+        }
+
+        .author-stats {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+            padding-top: 1rem;
+            border-top: 1px solid rgba(0, 217, 255, 0.2);
+        }
+
+        .stat {
+            text-align: center;
+        }
+
+        .stat-number {
+            display: block;
+            font-family: var(--font-display);
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--neon-cyan);
+        }
+
+        .stat-label {
+            display: block;
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-top: 0.3rem;
+        }
+
+        .author-socials {
+            display: flex;
+            gap: 0.8rem;
+            justify-content: center;
+        }
+
+        .social-link {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            border: 2px solid var(--neon-cyan);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--neon-cyan);
+            text-decoration: none;
+            transition: all 0.3s ease;
+            font-size: 1.1rem;
+        }
+
+        .social-link:hover {
+            background: rgba(0, 217, 255, 0.2);
+            box-shadow: 0 0 15px rgba(0, 217, 255, 0.6);
+            transform: scale(1.1);
+        }
+
+        @media (max-width: 768px) {
+            .authors-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .author-avatar {
+                width: 100px;
+                height: 100px;
+            }
+
+            .author-name {
+                font-size: 1.3rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- HEADER -->
+    <header>
+        <div class="header-container">
+            <a href="/" class="logo">◆ OTANIMES ◆</a>
+            <nav>
+                <a href="/">Home</a>
+                <a href="animes.html">Animes</a>
+                <a href="autores.html">Autores</a>
+                <a href="contato.html">Contato</a>
+                <button class="btn-newsletter" onclick="window.location.href='newsletter.html'">Newsletter</button>
+            </nav>
+        </div>
+    </header>
+
+    <!-- MAIN CONTENT -->
+    <main class="container">
+        <!-- PAGE HEADER -->
+        <header class="page-header">
+            <h1>👥 Nossos Autores</h1>
+            <p>Conheça os escritores apaixonados por animes que trazem análises profundas e curiosidades incríveis!</p>
+        </header>
+
+        <!-- AUTHORS GRID -->
+        <section class="authors-grid">
+            <!-- Author 1 -->
+            <article class="author-card">
+                <div class="author-header">
+                    <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=120&h=120&fit=crop" alt="Gustavo Azevedo" class="author-avatar">
+                    <h2 class="author-name">Gustavo Azevedo</h2>
+                    <span class="author-nickname">@Otagust</span>
+                    <p class="author-role">Fundador & Editor Chefe</p>
+                </div>
+                <div class="author-content">
+                    <p class="author-bio">Apaixonado por animes desde 2008, Gustavo dedica seu tempo a análises profundas de narrativas, personagens e impacto cultural. Especialista em teoria de mangás e história do anime.</p>
+                    
+                    <div class="author-stats">
+                        <div class="stat">
+                            <span class="stat-number">47</span>
+                            <span class="stat-label">Artigos</span>
+                        </div>
+                        <div class="stat">
+                            <span class="stat-number">12.5K</span>
+                            <span class="stat-label">Seguidores</span>
+                        </div>
+                    </div>
+
+                    <div class="author-socials">
+                        <a href="#" class="social-link" title="Twitter">𝕏</a>
+                        <a href="#" class="social-link" title="Instagram">📷</a>
+                        <a href="#" class="social-link" title="Discord">💬</a>
+                        <a href="#" class="social-link" title="YouTube">▶️</a>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Author 2 -->
+            <article class="author-card">
+                <div class="author-header">
+                    <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=120&h=120&fit=crop" alt="Marina Tanaka" class="author-avatar">
+                    <h2 class="author-name">Marina Tanaka</h2>
+                    <span class="author-nickname">@MarinaAnimes</span>
+                    <p class="author-role">Crítica de Animes</p>
+                </div>
+                <div class="author-content">
+                    <p class="author-bio">Especialista em análise de roteiros e desenvolvimento de personagens. Marina combina conhecimento acadêmico com paixão genuína pelos animes mais complexos e desafiadores.</p>
+                    
+                    <div class="author-stats">
+                        <div class="stat">
+                            <span class="stat-number">32</span>
+                            <span class="stat-label">Artigos</span>
+                        </div>
+                        <div class="stat">
+                            <span class="stat-number">8.3K</span>
+                            <span class="stat-label">Seguidores</span>
+                        </div>
+                    </div>
+
+                    <div class="author-socials">
+                        <a href="#" class="social-link" title="Twitter">𝕏</a>
+                        <a href="#" class="social-link" title="Instagram">📷</a>
+                        <a href="#" class="social-link" title="Discord">💬</a>
+                        <a href="#" class="social-link" title="YouTube">▶️</a>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Author 3 -->
+            <article class="author-card">
+                <div class="author-header">
+                    <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=120&h=120&fit=crop" alt="Lucas Yamamoto" class="author-avatar">
+                    <h2 class="author-name">Lucas Yamamoto</h2>
+                    <span class="author-nickname">@LucasOtaku</span>
+                    <p class="author-role">Jornalista de Notícias</p>
+                </div>
+                <div class="author-content">
+                    <p class="author-bio">Sempre atualizado com as últimas notícias do mundo anime. Lucas acompanha produções, estúdios e eventos internacionais para trazer informações em primeira mão.</p>
+                    
+                    <div class="author-stats">
+                        <div class="stat">
+                            <span class="stat-number">58</span>
+                            <span class="stat-label">Artigos</span>
+                        </div>
+                        <div class="stat">
+                            <span class="stat-number">15.2K</span>
+                            <span class="stat-label">Seguidores</span>
+                        </div>
+                    </div>
+
+                    <div class="author-socials">
+                        <a href="#" class="social-link" title="Twitter">𝕏</a>
+                        <a href="#" class="social-link" title="Instagram">📷</a>
+                        <a href="#" class="social-link" title="Discord">💬</a>
+                        <a href="#" class="social-link" title="YouTube">▶️</a>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Author 4 -->
+            <article class="author-card">
+                <div class="author-header">
+                    <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=120&h=120&fit=crop" alt="Akira Sato" class="author-avatar">
+                    <h2 class="author-name">Akira Sato</h2>
+                    <span class="author-nickname">@AkiraManga</span>
+                    <p class="author-role">Especialista em Mangás</p>
+                </div>
+                <div class="author-content">
+                    <p class="author-bio">Leitor voraz de mangás desde a infância. Akira traz perspectivas únicas sobre adaptações de mangá para anime e a importância da obra original.</p>
+                    
+                    <div class="author-stats">
+                        <div class="stat">
+                            <span class="stat-number">28</span>
+                            <span class="stat-label">Artigos</span>
+                        </div>
+                        <div class="stat">
+                            <span class="stat-number">6.8K</span>
+                            <span class="stat-label">Seguidores</span>
+                        </div>
+                    </div>
+
+                    <div class="author-socials">
+                        <a href="#" class="social-link" title="Twitter">𝕏</a>
+                        <a href="#" class="social-link" title="Instagram">📷</a>
+                        <a href="#" class="social-link" title="Discord">💬</a>
+                        <a href="#" class="social-link" title="YouTube">▶️</a>
+                    </div>
+                </div>
+            </article>
+        </section>
+    </main>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Otanimes</h3>
+                <p>Portal do Multiverso Otaku - Notícias, análises e curiosidades sobre animes, mangás e cultura geek.</p>
+            </div>
+            <div class="footer-section">
+                <h3>Navegação</h3>
+                <a href="/">Home</a>
+                <a href="animes.html">Animes</a>
+                <a href="autores.html">Autores</a>
+                <a href="contato.html">Contato</a>
+            </div>
+            <div class="footer-section">
+                <h3>Comunidade</h3>
+                <a href="#">Discord</a>
+                <a href="#">Twitter</a>
+                <a href="#">Instagram</a>
+                <a href="#">YouTube</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 Otanimes. Todos os direitos reservados. | Design Cyberpunk Futurista</p>
+        </div>
+    </footer>
+
+    <!-- JS -->
+    <script src="assets/js/main.js"></script>
+</body>
+</html>

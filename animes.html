@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Animes - Otanimes</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Space+Mono:wght@400;700&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="assets/css/styles.css">
+    <style>
+        /* ANIMES PAGE STYLES */
+        .articles-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .article-card {
+            background: var(--bg-card);
+            border: 2px solid rgba(0, 217, 255, 0.3);
+            border-radius: 4px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            position: relative;
+            cursor: pointer;
+            box-shadow: 0 0 15px rgba(0, 217, 255, 0.1);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .article-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0, 217, 255, 0.2), transparent);
+            transition: left 0.5s ease;
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        .article-card:hover {
+            border-color: var(--neon-cyan);
+            box-shadow: 0 0 30px rgba(0, 217, 255, 0.6), inset 0 0 20px rgba(0, 217, 255, 0.05);
+            transform: translateY(-5px);
+        }
+
+        .article-card:hover::before {
+            left: 100%;
+        }
+
+        .article-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-bottom: 2px solid var(--neon-magenta);
+        }
+
+        .article-content {
+            padding: 1.5rem;
+            position: relative;
+            z-index: 2;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .article-category {
+            display: inline-block;
+            background: rgba(0, 217, 255, 0.2);
+            color: var(--neon-cyan);
+            padding: 0.4rem 0.8rem;
+            border-radius: 2px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 0.8rem;
+            border: 1px solid var(--neon-cyan);
+            width: fit-content;
+        }
+
+        .article-title {
+            font-family: var(--font-display);
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 0.8rem;
+            color: var(--text-primary);
+            line-height: 1.3;
+            transition: color 0.3s ease;
+        }
+
+        .article-card:hover .article-title {
+            color: var(--neon-cyan);
+            text-shadow: 0 0 10px rgba(0, 217, 255, 0.6);
+        }
+
+        .article-excerpt {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            margin-bottom: 1rem;
+            line-height: 1.6;
+            flex-grow: 1;
+        }
+
+        .article-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            border-top: 1px solid rgba(0, 217, 255, 0.2);
+            padding-top: 1rem;
+        }
+
+        .article-author {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .article-author-avatar {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            border: 1px solid var(--neon-cyan);
+        }
+
+        .pagination {
+            display: flex;
+            justify-content: center;
+            gap: 0.5rem;
+            margin: 3rem 0;
+            flex-wrap: wrap;
+        }
+
+        .pagination a, .pagination span {
+            padding: 0.7rem 1rem;
+            border: 2px solid rgba(0, 217, 255, 0.3);
+            border-radius: 4px;
+            color: var(--text-secondary);
+            text-decoration: none;
+            transition: all 0.3s ease;
+            font-weight: 600;
+            font-family: var(--font-display);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 0.85rem;
+        }
+
+        .pagination a:hover {
+            border-color: var(--neon-cyan);
+            color: var(--neon-cyan);
+            box-shadow: 0 0 15px rgba(0, 217, 255, 0.4);
+        }
+
+        .pagination .active {
+            background: linear-gradient(135deg, var(--neon-cyan), var(--neon-magenta));
+            color: var(--bg-dark);
+            border-color: var(--neon-cyan);
+            box-shadow: 0 0 20px rgba(0, 217, 255, 0.6);
+        }
+
+        @media (max-width: 768px) {
+            .articles-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .pagination {
+                gap: 0.3rem;
+            }
+
+            .pagination a, .pagination span {
+                padding: 0.5rem 0.8rem;
+                font-size: 0.75rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- HEADER -->
+    <header>
+        <div class="header-container">
+            <a href="/" class="logo">◆ OTANIMES ◆</a>
+            <nav>
+                <a href="/">Home</a>
+                <a href="animes.html">Animes</a>
+                <a href="autores.html">Autores</a>
+                <a href="contato.html">Contato</a>
+                <button class="btn-newsletter" onclick="window.location.href='newsletter.html'">Newsletter</button>
+            </nav>
+        </div>
+    </header>
+
+    <!-- MAIN CONTENT -->
+    <main class="container-wide">
+        <!-- PAGE HEADER -->
+        <header class="page-header">
+            <h1>🎬 Todos os Animes</h1>
+            <p>Explore nossa biblioteca completa de artigos sobre animes, mangás e cultura otaku</p>
+        </header>
+
+        <!-- ARTICLES GRID -->
+        <section class="articles-grid">
+            <article class="article-card" onclick="window.location.href='artigo.html'">
+                <img src="https://images.unsplash.com/photo-1578926314433-e2789279f4aa?w=400&h=200&fit=crop" alt="Artigo" class="article-image">
+                <div class="article-content">
+                    <span class="article-category">Animes</span>
+                    <h3 class="article-title">Demon Slayer: Infinity Castle já é um dos maiores filmes de 2025</h3>
+                    <p class="article-excerpt">O fenômeno de Demon Slayer segue firme nas bilheteiras globais. O novo filme da Ufotable superou produções de peso de Hollywood.</p>
+                    <div class="article-meta">
+                        <span class="article-author">
+                            <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=24&h=24&fit=crop" alt="Avatar" class="article-author-avatar">
+                            Gustavo
+                        </span>
+                        <span>29 set 2025</span>
+                    </div>
+                </div>
+            </article>
+
+            <article class="article-card" onclick="window.location.href='artigo.html'">
+                <img src="https://images.unsplash.com/photo-1578926314433-e2789279f4aa?w=400&h=200&fit=crop" alt="Artigo" class="article-image">
+                <div class="article-content">
+                    <span class="article-category">Animes</span>
+                    <h3 class="article-title">Por que personagens negros em animes têm cabelo branco ou claro</h3>
+                    <p class="article-excerpt">Um padrão curioso vem chamando atenção no universo dos animes. Tem uma explicação ligada à produção de mangás em P&B.</p>
+                    <div class="article-meta">
+                        <span class="article-author">
+                            <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=24&h=24&fit=crop" alt="Avatar" class="article-author-avatar">
+                            Gustavo
+                        </span>
+                        <span>21 ago 2025</span>
+                    </div>
+                </div>
+            </article>
+
+            <article class="article-card" onclick="window.location.href='artigo.html'">
+                <img src="https://images.unsplash.com/photo-1578926314433-e2789279f4aa?w=400&h=200&fit=crop" alt="Artigo" class="article-image">
+                <div class="article-content">
+                    <span class="article-category">Notícias</span>
+                    <h3 class="article-title">Indonésia proíbe bandeira de One Piece após protestos contra o governo</h3>
+                    <p class="article-excerpt">Durante as comemorações da Independência, cidadãos indonésios começaram a levantar a bandeira dos Piratas do Chapéu de Palha.</p>
+                    <div class="article-meta">
+                        <span class="article-author">
+                            <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=24&h=24&fit=crop" alt="Avatar" class="article-author-avatar">
+                            Lucas
+                        </span>
+                        <span>21 ago 2025</span>
+                    </div>
+                </div>
+            </article>
+
+            <article class="article-card" onclick="window.location.href='artigo.html'">
+                <img src="https://images.unsplash.com/photo-1578926314433-e2789279f4aa?w=400&h=200&fit=crop" alt="Artigo" class="article-image">
+                <div class="article-content">
+                    <span class="article-category">Animes</span>
+                    <h3 class="article-title">Okarun em DanDaDan: Rotina do personagem revela que ele quase não dorme</h3>
+                    <p class="article-excerpt">O databook de DanDaDan trouxe detalhes surpreendentes sobre a rotina diária de Okarun — e o resultado chocou os fãs.</p>
+                    <div class="article-meta">
+                        <span class="article-author">
+                            <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=24&h=24&fit=crop" alt="Avatar" class="article-author-avatar">
+                            Gustavo
+                        </span>
+                        <span>21 ago 2025</span>
+                    </div>
+                </div>
+            </article>
+
+            <article class="article-card" onclick="window.location.href='artigo.html'">
+                <img src="https://images.unsplash.com/photo-1578926314433-e2789279f4aa?w=400&h=200&fit=crop" alt="Artigo" class="article-image">
+                <div class="article-content">
+                    <span class="article-category">Animes</span>
+                    <h3 class="article-title">Autor de One-Punch Man Eleva o Nível com Arte da Tatsumaki</h3>
+                    <p class="article-excerpt">Yusuke Murata, o lendário artista por trás de One-Punch Man, mais uma vez está causando burburinho na internet.</p>
+                    <div class="article-meta">
+                        <span class="article-author">
+                            <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=24&h=24&fit=crop" alt="Avatar" class="article-author-avatar">
+                            Marina
+                        </span>
+                        <span>21 ago 2025</span>
+                    </div>
+                </div>
+            </article>
+
+            <article class="article-card" onclick="window.location.href='artigo.html'">
+                <img src="https://images.unsplash.com/photo-1578926314433-e2789279f4aa?w=400&h=200&fit=crop" alt="Artigo" class="article-image">
+                <div class="article-content">
+                    <span class="article-category">Animes</span>
+                    <h3 class="article-title">One Piece Live Action: escolha da atriz de Vivi gera polêmica</h3>
+                    <p class="article-excerpt">O live action de One Piece voltou a ser assunto entre os fãs após o anúncio da atriz que interpretará Vivi.</p>
+                    <div class="article-meta">
+                        <span class="article-author">
+                            <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=24&h=24&fit=crop" alt="Avatar" class="article-author-avatar">
+                            Gustavo
+                        </span>
+                        <span>21 ago 2025</span>
+                    </div>
+                </div>
+            </article>
+
+            <article class="article-card" onclick="window.location.href='artigo.html'">
+                <img src="https://images.unsplash.com/photo-1578926314433-e2789279f4aa?w=400&h=200&fit=crop" alt="Artigo" class="article-image">
+                <div class="article-content">
+                    <span class="article-category">Animes</span>
+                    <h3 class="article-title">Animes Que Geram Traumas Irreparáveis</h3>
+                    <p class="article-excerpt">Algumas histórias vão além do entretenimento e deixam cicatrizes psicológicas nos espectadores.</p>
+                    <div class="article-meta">
+                        <span class="article-author">
+                            <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=24&h=24&fit=crop" alt="Avatar" class="article-author-avatar">
+                            Gustavo
+                        </span>
+                        <span>12 jun 2025</span>
+                    </div>
+                </div>
+            </article>
+
+            <article class="article-card" onclick="window.location.href='artigo.html'">
+                <img src="https://images.unsplash.com/photo-1578926314433-e2789279f4aa?w=400&h=200&fit=crop" alt="Artigo" class="article-image">
+                <div class="article-content">
+                    <span class="article-category">Animes</span>
+                    <h3 class="article-title">Protagonistas De Anime Que Você Faria de Tudo Para Não Estar na Pele</h3>
+                    <p class="article-excerpt">Alguns heróis carregam fardos tão pesados que suas vitórias parecem mais como sobrevivência.</p>
+                    <div class="article-meta">
+                        <span class="article-author">
+                            <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=24&h=24&fit=crop" alt="Avatar" class="article-author-avatar">
+                            Gustavo
+                        </span>
+                        <span>12 jun 2025</span>
+                    </div>
+                </div>
+            </article>
+
+            <article class="article-card" onclick="window.location.href='artigo.html'">
+                <img src="https://images.unsplash.com/photo-1578926314433-e2789279f4aa?w=400&h=200&fit=crop" alt="Artigo" class="article-image">
+                <div class="article-content">
+                    <span class="article-category">Animes</span>
+                    <h3 class="article-title">Animes que Mereciam um Remake: Obras que Precisam de uma Segunda Chance</h3>
+                    <p class="article-excerpt">Algumas histórias foram grandes, mas suas adaptações não fizeram justiça ao potencial.</p>
+                    <div class="article-meta">
+                        <span class="article-author">
+                            <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=24&h=24&fit=crop" alt="Avatar" class="article-author-avatar">
+                            Gustavo
+                        </span>
+                        <span>12 jun 2025</span>
+                    </div>
+                </div>
+            </article>
+
+            <article class="article-card" onclick="window.location.href='artigo.html'">
+                <img src="https://images.unsplash.com/photo-1578926314433-e2789279f4aa?w=400&h=200&fit=crop" alt="Artigo" class="article-image">
+                <div class="article-content">
+                    <span class="article-category">Animes</span>
+                    <h3 class="article-title">Coisas Que Nem Satoru Gojo Conseguia Fazer Em Jujutsu Kaisen</h3>
+                    <p class="article-excerpt">O mais forte não era um deus – era um homem que escolheu rir das próprias limitações.</p>
+                    <div class="article-meta">
+                        <span class="article-author">
+                            <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=24&h=24&fit=crop" alt="Avatar" class="article-author-avatar">
+                            Gustavo
+                        </span>
+                        <span>11 jun 2025</span>
+                    </div>
+                </div>
+            </article>
+        </section>
+
+        <!-- PAGINATION -->
+        <nav class="pagination">
+            <span class="active">1</span>
+            <a href="#">2</a>
+            <a href="#">3</a>
+            <a href="#">4</a>
+            <a href="#">5</a>
+            <a href="#">></a>
+            <a href="#">>></a>
+        </nav>
+    </main>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Otanimes</h3>
+                <p>Portal do Multiverso Otaku - Notícias, análises e curiosidades sobre animes, mangás e cultura geek.</p>
+            </div>
+            <div class="footer-section">
+                <h3>Navegação</h3>
+                <a href="/">Home</a>
+                <a href="animes.html">Animes</a>
+                <a href="autores.html">Autores</a>
+                <a href="contato.html">Contato</a>
+            </div>
+            <div class="footer-section">
+                <h3>Comunidade</h3>
+                <a href="#">Discord</a>
+                <a href="#">Twitter</a>
+                <a href="#">Instagram</a>
+                <a href="#">YouTube</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 Otanimes. Todos os direitos reservados. | Design Cyberpunk Futurista</p>
+        </div>
+    </footer>
+
+    <!-- JS -->
+    <script src="assets/js/main.js"></script>
+</body>
+</html>
